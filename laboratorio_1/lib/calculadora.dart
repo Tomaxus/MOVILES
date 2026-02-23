@@ -1,57 +1,75 @@
+// Importa los widgets de Material Design (botones, colores, Scaffold, etc.)
 import 'package:flutter/material.dart';
 
-// Widget principal de la calculadora
+// Widget principal de la calculadora (puede cambiar su estado)
 class CalculatorUI extends StatefulWidget {
+  // Constructor del widget
   const CalculatorUI({super.key});
 
+  // Crea el estado del widget
   @override
   State<CalculatorUI> createState() => _CalculatorUIState();
 }
 
+// Clase donde va la lógica de la calculadora
 class _CalculatorUIState extends State<CalculatorUI> {
-  // Variables para almacenar el estado de la calculadora
-  String pantalla = '0'; // Texto mostrado en la pantalla
-  double? numeroAnterior; // Primer número de la operación
-  String operacion = ''; // Operador (+, -, x, ÷)
-  bool nuevaOperacion = true; // Indica si debe empezar nueva entrada
+  // Texto que se muestra en la pantalla
+  String pantalla = '0';
 
+  // Guarda el primer número de la operación
+  double? numeroAnterior;
+
+  // Guarda el operador matemático (+, -, x, ÷)
+  String operacion = '';
+
+  // Indica si se empieza a escribir un número nuevo
+  bool nuevaOperacion = true;
+
+  // Construye la interfaz visual
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Color del fondo
       backgroundColor: Colors.grey[200],
+
+      // Centra la calculadora en pantalla
       body: Center(
         child: Container(
-          width: 300,
-          padding: const EdgeInsets.all(16),
+          width: 300, // Ancho de la calculadora
+          padding: const EdgeInsets.all(16), // Espaciado interno
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            color: Colors.white, // Color del cuerpo
+            borderRadius: BorderRadius.circular(20), // Bordes redondeados
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Pantalla de la calculadora - muestra el número actual
+              // Pantalla de la calculadora
               Container(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.centerRight, // Texto a la derecha
                 padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.only(bottom: 16),
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Colors.grey[300], // Fondo de pantalla
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(pantalla, style: const TextStyle(fontSize: 32)),
+                child: Text(
+                  pantalla,
+                  style: const TextStyle(fontSize: 32),
+                ), // Muestra el número
               ),
 
-              // Grilla de botones: números y operaciones
+              // Área de botones
               SizedBox(
                 height: 360,
                 child: Row(
                   children: [
-                    // Left 3 columns as 5 rows
+                    // Columna izquierda (números y funciones)
                     Expanded(
                       flex: 3,
                       child: Column(
                         children: [
+                          // Fila AC, +/-, %
                           Expanded(
                             child: Row(
                               children: [
@@ -73,6 +91,8 @@ class _CalculatorUIState extends State<CalculatorUI> {
                               ],
                             ),
                           ),
+
+                          // Fila 7 8 9
                           Expanded(
                             child: Row(
                               children: [
@@ -88,6 +108,8 @@ class _CalculatorUIState extends State<CalculatorUI> {
                               ],
                             ),
                           ),
+
+                          // Fila 4 5 6
                           Expanded(
                             child: Row(
                               children: [
@@ -103,6 +125,8 @@ class _CalculatorUIState extends State<CalculatorUI> {
                               ],
                             ),
                           ),
+
+                          // Fila 1 2 3
                           Expanded(
                             child: Row(
                               children: [
@@ -118,6 +142,8 @@ class _CalculatorUIState extends State<CalculatorUI> {
                               ],
                             ),
                           ),
+
+                          // Fila . 0 =
                           Expanded(
                             child: Row(
                               children: [
@@ -137,6 +163,7 @@ class _CalculatorUIState extends State<CalculatorUI> {
                       ),
                     ),
 
+                    // Columna derecha (operadores)
                     Expanded(
                       flex: 1,
                       child: Column(
@@ -167,29 +194,31 @@ class _CalculatorUIState extends State<CalculatorUI> {
     );
   }
 
-  // Crea un botón gris estándar
+  // Botón gris normal
   Widget buildButton(String text, VoidCallback onPressed) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: onPressed, // Detecta el toque
       child: Container(
         margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: Colors.grey[400],
+          color: Colors.grey[400], // Color gris
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(child: Text(text, style: const TextStyle(fontSize: 20))),
+        child: Center(
+          child: Text(text, style: const TextStyle(fontSize: 20)),
+        ), // Texto del botón
       ),
     );
   }
 
-  // Crea un botón naranja (para la suma)
+  // Botón naranja (para suma)
   Widget buildOrangeButton(String text, VoidCallback onPressed) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
         margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: Colors.orange, // Color naranja
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
@@ -202,30 +231,36 @@ class _CalculatorUIState extends State<CalculatorUI> {
     );
   }
 
-  // Maneja los eventos de los botones
+  // Función que maneja lo que pasa cuando presionas un botón
   void presionar(String valor) {
     setState(() {
+      // Actualiza la pantalla
+
+      // Botón AC: reinicia todo
       if (valor == 'AC') {
-        // Limpia todo y vuelve al estado inicial
         pantalla = '0';
         numeroAnterior = null;
         operacion = '';
         nuevaOperacion = true;
-      } else if (valor == '+/-') {
-        // Cambia el signo del número actual
+      }
+      // Cambiar signo
+      else if (valor == '+/-') {
         double num = double.parse(pantalla);
         pantalla = (num * -1).toString();
-      } else if (valor == '%') {
-        // Convierte el número a porcentaje
+      }
+      // Porcentaje
+      else if (valor == '%') {
         double num = double.parse(pantalla);
         pantalla = (num / 100).toString();
-      } else if (['+', '-', 'x', '÷'].contains(valor)) {
-        // Guarda el número y la operación para cálculo posterior
+      }
+      // Guarda operador y primer número
+      else if (['+', '-', 'x', '÷'].contains(valor)) {
         numeroAnterior = double.parse(pantalla);
         operacion = valor;
         nuevaOperacion = true;
-      } else if (valor == '=') {
-        // Calcula el resultado usando los dos números y la operación
+      }
+      // Calcula el resultado
+      else if (valor == '=') {
         if (numeroAnterior != null && operacion.isNotEmpty) {
           double num2 = double.parse(pantalla);
           double resultado = 0;
@@ -245,21 +280,23 @@ class _CalculatorUIState extends State<CalculatorUI> {
               break;
           }
 
-          pantalla = resultado.toString();
+          pantalla = resultado.toString(); // Muestra resultado
           numeroAnterior = null;
           operacion = '';
           nuevaOperacion = true;
         }
-      } else {
-        // Ingresa números y el punto decimal
+      }
+      // Escribir números y punto
+      else {
         if (nuevaOperacion) {
-          pantalla = valor;
+          pantalla = valor; // Reemplaza pantalla
           nuevaOperacion = false;
         } else {
-          if (valor == '.' && pantalla.contains('.')) {
-            return; // Evita múltiples puntos
-          }
-          pantalla = pantalla == '0' ? valor : pantalla + valor;
+          if (valor == '.' && pantalla.contains('.'))
+            return; // Evita doble punto
+          pantalla = pantalla == '0'
+              ? valor
+              : pantalla + valor; // Agrega número
         }
       }
     });
