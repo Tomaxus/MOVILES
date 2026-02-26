@@ -11,11 +11,11 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
-  List<Movie> _allMovies = []; // Todas las películas
-  List<Movie> _displayedMovies = []; // Las 10 que se ven en pantalla
+  List<Movie> _allMovies = [];
+  List<Movie> _displayedMovies = [];
 
   int _currentPage = 1;
-  final int _itemsPerPage = 10;
+  final int _itemsPerPage = 4;
   bool _isLoading = true;
 
   @override
@@ -30,7 +30,7 @@ class _AppScreenState extends State<AppScreen> {
       setState(() {
         _allMovies = movies;
         _isLoading = false;
-        _updateDisplayedMovies(1); // Muestra la primera página
+        _updateDisplayedMovies(1);
       });
     } catch (e) {
       debugPrint("Error: $e");
@@ -52,16 +52,14 @@ class _AppScreenState extends State<AppScreen> {
     });
   }
 
-  // Calcula cuántas páginas hay en total
   int get _totalPages => (_allMovies.length / _itemsPerPage).ceil();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // ¡Esto nos dirá la verdad! Te mostrará por ejemplo: "Catálogo (12 pelis)"
         title: Text(
-          'Catálogo (${_allMovies.length} pelis)',
+          'PrimePeroNo',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -91,7 +89,6 @@ class _AppScreenState extends State<AppScreen> {
                   ),
           ),
 
-          // Barra de Paginación Fija
           Container(
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
@@ -125,7 +122,7 @@ class _AppScreenState extends State<AppScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    '$_currentPage / $_totalPages', // Muestra página actual / total
+                    '$_currentPage / $_totalPages',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

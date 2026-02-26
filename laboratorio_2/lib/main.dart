@@ -13,11 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Películas App',
       debugShowCheckedModeBanner: false,
-      // Activamos el modo oscuro
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.blueAccent,
-        scaffoldBackgroundColor: const Color(0xFF121212), // Fondo oscuro elegante
+        scaffoldBackgroundColor: const Color(0xFF121212),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF121212),
           elevation: 0,

@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/movie.dart';
 
 class MovieService {
-  // Le agregamos /limit/1000 para forzar a que no nos restrinja resultados
-  static const _endpoint = 'https://devsapihub.com/api-movies/limit/1000';
+  static const _endpoint = 'https://devsapihub.com/api-movies/limit/20';
 
   static Future<List<Movie>> fetchAllMovies() async {
     final res = await http.get(Uri.parse(_endpoint));

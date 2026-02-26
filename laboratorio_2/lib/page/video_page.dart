@@ -14,12 +14,36 @@ class VideoPage extends StatefulWidget {
 class _VideoPageState extends State<VideoPage> {
   late YoutubePlayerController _controller;
 
+  final Map<int, String> _trailers = {
+    1: '6hB3S9bIaco',
+    2: 'rBxcF-r9Ibs',
+    3: 'UaVTIH8mujA',
+    4: '9O1Iy9od7-A',
+    5: 'EXeTwQWrcwY',
+    6: '_13J_9B5jEk',
+    7: '7psP7xBEa28',
+    8: 'y2rYRu8UW8M',
+    9: 'TjhZuh-6MTQ',
+    10: 'WCN5JJY_wiA',
+    11: 'V75dSyZa9eQ',
+    12: 'qtRKdVHc-cE',
+    13: 'Way9Dexny3w',
+    14: 'uYPbbksJxIg',
+    15: 'pBk4NYhWNMM',
+    16: 'JfVOs4VSpmA',
+    17: 'd9MyW72ELq0',
+    18: 'mqqft2x_Aa4',
+    19: 'wxN1T1uxQ2g',
+    20: 'vKQi3bBA1y8',
+  };
+
   @override
   void initState() {
     super.initState();
-    // Aquí inicializamos el reproductor con el video que pediste para TODOS
+    String youtubeVideoId = _trailers[widget.movie.id] ?? 'cvDxdUcxPUE';
+
     _controller = YoutubePlayerController.fromVideoId(
-      videoId: 'cvDxdUcxPUE',
+      videoId: youtubeVideoId,
       autoPlay: false,
       params: const YoutubePlayerParams(
         showControls: true,
@@ -46,14 +70,11 @@ class _VideoPageState extends State<VideoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // REPRODUCTOR DE YOUTUBE
             Container(
               width: double.infinity,
               color: Colors.black,
               child: YoutubePlayer(controller: _controller),
             ),
-
-            // INFORMACIÓN DE LA PELÍCULA
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

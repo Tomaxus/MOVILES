@@ -32,7 +32,6 @@ class MovieCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // Póster de la película
               Image.network(
                 movie.imageUrl,
                 fit: BoxFit.cover,
@@ -47,7 +46,6 @@ class MovieCard extends StatelessWidget {
                   );
                 },
               ),
-              // Degradado oscuro en la parte inferior para el texto
               Positioned(
                 bottom: 0,
                 left: 0,
