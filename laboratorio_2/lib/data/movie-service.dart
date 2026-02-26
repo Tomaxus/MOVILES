@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import '../models/movie.dart';
 
 class MovieService {
-  static const _endpoint = 'https://devsapihub.com/api-movies';
+  // Le agregamos /limit/1000 para forzar a que no nos restrinja resultados
+  static const _endpoint = 'https://devsapihub.com/api-movies/limit/1000';
 
-  static Future<List<Movie>> fetchMovies({int page = 1}) async {
-    final url = '$_endpoint?page=$page&limit=10';
-    final res = await http.get(Uri.parse(url));
+  static Future<List<Movie>> fetchAllMovies() async {
+    final res = await http.get(Uri.parse(_endpoint));
 
     if (res.statusCode != 200) {
       throw Exception('Error al cargar películas');
