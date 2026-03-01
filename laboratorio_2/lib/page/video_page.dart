@@ -1,19 +1,32 @@
+// Importa los widgets básicos de Flutter
 import 'package:flutter/material.dart';
+
+// Importa el reproductor de YouTube (paquete externo)
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+// Importa el modelo Movie para recibir los datos de la película
 import '../models/movie.dart';
 
+// VideoPage es un StatefulWidget porque necesita manejar estado ya que es el reproductor del video
 class VideoPage extends StatefulWidget {
+  // Recibe la película seleccionada desde la pantalla anterior
   final Movie movie;
 
+  // Constructor que obliga a enviar la película
   const VideoPage({Key? key, required this.movie}) : super(key: key);
 
+  // Crea el estado asociado a este widget
   @override
   _VideoPageState createState() => _VideoPageState();
 }
 
+// Logica y estado del VideoPage
 class _VideoPageState extends State<VideoPage> {
+  // Controlador que maneja el reproductor de YouTube
   late YoutubePlayerController _controller;
 
+  // Key = id de la película
+  // Value = id del video en YouTube
   final Map<int, String> _trailers = {
     1: '6hB3S9bIaco',
     2: 'rBxcF-r9Ibs',
@@ -40,46 +53,64 @@ class _VideoPageState extends State<VideoPage> {
   @override
   void initState() {
     super.initState();
+
+    // Busca el trailer según el id de la película
     String youtubeVideoId = _trailers[widget.movie.id] ?? 'cvDxdUcxPUE';
 
+    // Crea el reproductor con el video encontrado
     _controller = YoutubePlayerController.fromVideoId(
       videoId: youtubeVideoId,
-      autoPlay: false,
+      autoPlay: true,
       params: const YoutubePlayerParams(
         showControls: true,
-        showFullscreenButton: true,
+        showFullscreenButton: false,
       ),
     );
   }
 
+  // Se ejecuta cuando el widget se cierra
   @override
   void dispose() {
     _controller.close();
     super.dispose();
   }
 
+  // Interfaz visual
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      // Fondo oscuro
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
+      // Barra superior
       appBar: AppBar(
         title: Text(widget.movie.title, style: const TextStyle(fontSize: 16)),
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
+
+      // Permite hacer scroll si el contenido es largo
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Contenedor del video
             Container(
+              // todo el ancho que este disponible
               width: double.infinity,
               color: Colors.black,
+
+              // Widget que muestra el reproductor de YouTube
               child: YoutubePlayer(controller: _controller),
             ),
+
+            // Espaciado general del contenido
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(17),
+
               child: Column(
+                // esto es que alinee todo a la izquierda todos los hijos del column y start es el inicio del eje horizontal
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Título grande
                   Text(
                     widget.movie.title,
                     style: const TextStyle(
@@ -88,14 +119,21 @@ class _VideoPageState extends State<VideoPage> {
                       color: Colors.white,
                     ),
                   ),
+
                   const SizedBox(height: 12),
+
+                  // Fila con año, género y estrellas
                   Row(
                     children: [
+                      // Año
                       Text(
                         '${widget.movie.year}',
                         style: TextStyle(color: Colors.grey[400], fontSize: 16),
                       ),
+
                       const SizedBox(width: 16),
+
+                      // Género en una etiqueta
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
@@ -113,7 +151,10 @@ class _VideoPageState extends State<VideoPage> {
                           ),
                         ),
                       ),
+
                       const SizedBox(width: 16),
+
+                      // Estrellas
                       Row(
                         children: [
                           const Icon(Icons.star, color: Colors.amber, size: 20),
@@ -130,7 +171,10 @@ class _VideoPageState extends State<VideoPage> {
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 24),
+
+                  // Título sección Sinopsis
                   const Text(
                     'Sinopsis',
                     style: TextStyle(
@@ -139,7 +183,10 @@ class _VideoPageState extends State<VideoPage> {
                       color: Colors.white,
                     ),
                   ),
+
                   const SizedBox(height: 8),
+
+                  // Descripción de la película
                   Text(
                     widget.movie.description,
                     style: const TextStyle(
