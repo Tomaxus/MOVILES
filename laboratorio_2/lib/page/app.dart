@@ -109,7 +109,6 @@ class _AppScreenState extends State<AppScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // si estás en la página 1, está deshabilitado
           IconButton(
             icon: const Icon(Icons.chevron_left, size: 35),
             color: _currentPage > 1 ? Colors.white : Colors.grey[800],
@@ -120,7 +119,6 @@ class _AppScreenState extends State<AppScreen> {
 
           const SizedBox(width: 24),
 
-          // Muestra la página actual y el total de páginas
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             decoration: BoxDecoration(
@@ -139,7 +137,6 @@ class _AppScreenState extends State<AppScreen> {
 
           const SizedBox(width: 24),
 
-          // si estás en la última página, está deshabilitado (gris)
           IconButton(
             icon: const Icon(Icons.chevron_right, size: 35),
             color: _currentPage < _totalPages ? Colors.white : Colors.grey[800],
