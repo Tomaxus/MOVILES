@@ -36,7 +36,6 @@ class MovieCard extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
 
-          // Stack apila la imagen y el título uno encima del otro
           child: Stack(
             fit: StackFit.expand,
             children: [

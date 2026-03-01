@@ -46,7 +46,7 @@ class _AppScreenState extends State<AppScreen> {
 
   // Calcula qué películas mostrar según la página seleccionada
   void _updateDisplayedMovies(int page) {
-    //primera película de la página =
+    //primera película de la página
     int startIndex = (page - 1) * _itemsPerPage;
     // última película de la página
     int endIndex = startIndex + _itemsPerPage; // índice de fin
@@ -84,7 +84,7 @@ class _AppScreenState extends State<AppScreen> {
         crossAxisSpacing: 16, // espacio horizontal entre tarjetas
         mainAxisSpacing: 16, // espacio vertical entre tarjetas
       ),
-      // cantidad de elementos a mostrar (4 por página)
+      // cantidad de elementos a mostrar 
       itemCount: _displayedMovies.length,
       // Construye una MovieCard por cada película de la página
       itemBuilder: (context, index) =>
