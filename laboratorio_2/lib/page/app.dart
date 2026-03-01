@@ -120,7 +120,7 @@ class _AppScreenState extends State<AppScreen> {
 
           const SizedBox(width: 24),
 
-          // Muestra la página actual y el total: "2 / 5"
+          // Muestra la página actual y el total de páginas
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             decoration: BoxDecoration(
