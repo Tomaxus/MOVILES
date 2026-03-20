@@ -1,0 +1,8 @@
+node_modules/
+
+database.sqlite
+*.log
+.env
+coverage/
+.npm/
+.cache/
