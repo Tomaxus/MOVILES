@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+// Pantalla simple que confirma inicio de sesion exitoso.
 class PaginaBienvenida extends StatelessWidget {
+  // Nombre del usuario para personalizar el mensaje.
   final String usuario;
 
   const PaginaBienvenida({super.key, required this.usuario});
 
   @override
   Widget build(BuildContext context) {
+    // Vista centrada con icono, usuario y mensaje de estado.
     return Scaffold(
       appBar: AppBar(title: const Text('Bienvenido')),
       body: Center(
