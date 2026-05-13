@@ -1,0 +1,7 @@
+{
+  "widgets": [
+    {"type": "text", "value": "Bienvenido a la app dinámica"},
+    {"type": "button", "label": "Presióname", "action": "show_message"},
+    {"type": "personajes"}
+  ]
+}

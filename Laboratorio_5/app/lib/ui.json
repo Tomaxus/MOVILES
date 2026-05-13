@@ -1,0 +1,7 @@
+{
+  "widgets": [
+    {"type": "text", "value": "Bienvenido a la app dinámica de Rick and Morty"},
+    {"type": "button", "label": "HOLAAAAAAAAA", "action": "show_message"},
+    {"type": "personajes"}
+  ]
+}
